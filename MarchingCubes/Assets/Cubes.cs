@@ -28,28 +28,61 @@ public class Cubes : MonoBehaviour
     {
         float theta = (Mathf.PI * 2.0f) / (float)AudioAnalyser.bands.Length;
 
-        for (int i = 0; i < AudioAnalyser.bands.Length; i++)
+        //for (int i = 0; i < AudioAnalyser.bands.Length; i++)
+        //{
+        /*
+        //set position
+        Vector3 pos = new Vector3(Mathf.Sin(theta * i) * radius, 0, Mathf.Cos(theta * i) * radius);
+        pos = transform.TransformPoint(pos);
+
+        //set rotation
+        Quaternion rot = Quaternion.AngleAxis(theta * i * Mathf.Rad2Deg, Vector3.up);
+        rot = transform.rotation * rot;
+
+        //spawn cube
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.SetPositionAndRotation(pos, rot);
+
+        //parent
+        cube.transform.parent = this.transform;
+
+        //color
+        cube.GetComponent<Renderer>().material.color = Color.HSVToRGB(i / (float)AudioAnalyser.bands.Length, 1, 1);
+        elements.Add(cube);
+        */
+
+        Vector3 size = new Vector3(1, 9, 1);
+
+        for (int x = 0; x < size.x; x++ )
         {
-            //set position
-            Vector3 pos = new Vector3(Mathf.Sin(theta * i) * radius, 0, Mathf.Cos(theta * i) * radius);
-            pos = transform.TransformPoint(pos);
+            for (int y = 0; y < size.y; y++)
+            {
+                for (int z = 0; z < size.z; z++)
+                {
+                    //set position
+                    
+                    //pos = transform.TransformPoint(pos);
 
-            //set rotation
-            Quaternion rot = Quaternion.AngleAxis(theta * i * Mathf.Rad2Deg, Vector3.up);
-            rot = transform.rotation * rot;
+                    //set rotation
+                    //Quaternion rot = Quaternion.AngleAxis(theta * i * Mathf.Rad2Deg, Vector3.up);
+                    //rot = transform.rotation * rot;
 
-            //spawn cube
-            GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            cube.transform.SetPositionAndRotation(pos, rot);
+                    //spawn cube
+                    GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    cube.transform.position = new Vector3(x * size.x, z * size.z, y * size.y);
 
-            //parent
-            cube.transform.parent = this.transform;
+                    //parent
+                    cube.transform.parent = this.transform;
 
-            //color
-            cube.GetComponent<Renderer>().material.color = Color.HSVToRGB(i / (float)AudioAnalyser.bands.Length, 1, 1);
-            elements.Add(cube);
-
+                    //color
+                    cube.GetComponent<Renderer>().material.color = Color.HSVToRGB(y / (float)AudioAnalyser.bands.Length, 1, 1);
+                    elements.Add(cube);
+                }
+            }
         }
+            
+
+        //}
     }
 
     // Update is called once per frame
