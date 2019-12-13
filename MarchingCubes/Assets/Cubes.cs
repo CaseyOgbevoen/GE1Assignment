@@ -91,6 +91,7 @@ public class Cubes : MonoBehaviour
         for (int i = 0; i < elements.Count; i++)
         {
             Vector3 ls = elements[i].transform.localScale;
+            //dont go less than 0
             ls.y = Mathf.Lerp(ls.y, 1 + (AudioAnalyser.bands[i] * scale), Time.deltaTime * 3.0f);
             elements[i].transform.localScale = ls;
         }

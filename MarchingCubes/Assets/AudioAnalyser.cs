@@ -6,13 +6,13 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class AudioAnalyser : MonoBehaviour
 {
-    public bool useMic = false;
-    public AudioClip clip;
     AudioSource a;
-    public AudioMixerGroup amgMic;
+    public bool useMic = false;
+    public AudioClip clip; 
+    //public AudioMixerGroup amgMic;
     public AudioMixerGroup amgMaster;
 
-    public string selectedDevice;
+    //public string selectedDevice;
 
     public int frameSize = 512;
     public static float[] bands;
@@ -27,21 +27,9 @@ public class AudioAnalyser : MonoBehaviour
         spectrum = new float[frameSize];
         bands = new float[(int)Mathf.Log(frameSize, 2)];
 
-        if (useMic)
-        {
-            if (Microphone.devices.Length > 0)
-            {
-                selectedDevice = Microphone.devices[0].ToString();
-                a.clip = Microphone.Start(selectedDevice, true, 1, AudioSettings.outputSampleRate);
+        a.clip = clip;
+        a.outputAudioMixerGroup = amgMaster;
 
-                a.outputAudioMixerGroup = amgMic;
-            }
-        }
-        else
-        {
-            a.clip = clip;
-            a.outputAudioMixerGroup = amgMaster;
-        }
         a.Play();
     }
 
