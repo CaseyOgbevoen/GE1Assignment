@@ -15,7 +15,7 @@ public class Cubes : MonoBehaviour
     //public int numRows = 10;
 
     //spawn speed
-    public float spawnSpeed = 3;
+    public float spawnSpeed = 0;
 
     //vislualiser scale
     public float scale = 10;
