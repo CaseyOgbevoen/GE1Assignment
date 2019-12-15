@@ -4,18 +4,11 @@ using UnityEngine;
 
 public class Cubes : MonoBehaviour
 {
-    //dimensions of cubes
-    //public int width = 20;
-    //public int height = 20;
-
-    //start position
-    //Vector3 startPos = transform.position;
-
-    //number of rows to generate
-    //public int numRows = 10;
+    //row counter
+    public int numRows = 1;
 
     //spawn speed
-    public float spawnSpeed = 0;
+    public float spawnSpeed = 3000;
 
     //vislualiser scale
     public float scale = 10;
@@ -27,10 +20,12 @@ public class Cubes : MonoBehaviour
     void Start()
     {
         StartCoroutine(CreateVisualisers());
+        //CreateVisualisers();
     }
 
     //create vislualisers function
     IEnumerator CreateVisualisers()
+    //void CreateVisualisers()
     {
         //set position
         Vector3 startPos = transform.position;
@@ -38,7 +33,7 @@ public class Cubes : MonoBehaviour
 
         Vector3 size = new Vector3(1, 1, 9);
 
-        for (int n = 0; n < 10; n++)
+        for (int n = 0; n < numRows; n++)
         {
             for (int y = 0; y < size.y; y++)
             {
@@ -51,14 +46,13 @@ public class Cubes : MonoBehaviour
                     //parent
                     cube.transform.parent = this.transform;
 
-                    //color
-                    cube.GetComponent<Renderer>().material.color = Color.HSVToRGB(Random.value, 1, 1);
                     elements.Add(cube);
 
                     startPos.z++;
                 }
             }
             yield return new WaitForSeconds(spawnSpeed);
+            numRows++;
         }
     }
 
@@ -71,6 +65,8 @@ public class Cubes : MonoBehaviour
             ls.y = Mathf.Lerp(ls.y, 1 + (AudioAnalyser.bands[i] * scale), Time.deltaTime * 10.0f);
             elements[i].transform.localScale = ls;
 
+            //assign colour based on y value
+            elements[i].GetComponent<Renderer>().material.color = Color.HSVToRGB(ls.y / (float)AudioAnalyser.bands.Length, 1, 1);
 
         }
     }

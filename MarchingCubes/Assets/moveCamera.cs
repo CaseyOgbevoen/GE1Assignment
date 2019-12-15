@@ -4,17 +4,12 @@ using UnityEngine;
 
 public class moveCamera : MonoBehaviour
 {
-    //target point
-    public Transform target;
 
     //smooth speed
     public float smoothSpeed = 0.125f;
 
-    //current position
-    public int current = 0;
-
     //speed
-    public float speed = 0.5f;
+    public float speed = 3f;
 
     //waypoint list
     public List<Vector3> waypoints = new List<Vector3>();
