@@ -6,59 +6,48 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class AudioAnalyser : MonoBehaviour
 {
-    AudioSource a;
-    public bool useMic = false;
-    public AudioClip clip; 
-    public AudioMixerGroup amgMaster;
+    AudioSource audioSource; 
 
     public int frameSize = 512;
-    public static float[] bands;
-    public static float[] spectrum;
-
-    public float binWidth;
-    public float sampleRate;
-
-    private void Awake()
-    {
-        a = GetComponent<AudioSource>();
-        spectrum = new float[frameSize];
-        bands = new float[(int)Mathf.Log(frameSize, 2)];
-
-        //play audio
-        a.clip = clip;
-        a.outputAudioMixerGroup = amgMaster;
-        a.Play();
-    }
+    public static float[] samples = new float[512];
+    public static float[] bands = new float[8];
 
     void GetFrequencyBands()
     {
-        for (int i = 0; i < bands.Length; i++)
-        {
-            int start = (int)Mathf.Pow(2, i) - 1;
-            int width = (int)Mathf.Pow(2, i);
-            int end = start + width;
-            float average = 0;
-            for (int j = start; j < end; j++)
-            {
-                average += spectrum[j] * (j + 1);
-            }
-            average /= (float)width;
-            bands[i] = average;
-        }
+        int count = 0;
 
+        for (int i = 0; i < 8; i++)
+        {
+            float average = 0;
+            int sampleCount = (int)Mathf.Pow(2, i) * 2;
+
+            if (i == 7)
+            {
+                sampleCount += 2;
+            }
+
+            for (int j = 0; j < sampleCount; j++)
+            {
+                average += samples[count] * (count + 1);
+                count++;
+
+            }
+
+            average /= count;
+            bands[i] = average * 10;
+        }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        sampleRate = AudioSettings.outputSampleRate;
-        binWidth = AudioSettings.outputSampleRate / 2 / frameSize;
+            audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        a.GetSpectrumData(spectrum, 0, FFTWindow.Blackman);
+        audioSource.GetSpectrumData(samples, 0, FFTWindow.Blackman);
         GetFrequencyBands();
     }
 }

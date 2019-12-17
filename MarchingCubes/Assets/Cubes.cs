@@ -8,10 +8,10 @@ public class Cubes : MonoBehaviour
     public int numRows = 1;
 
     //spawn speed
-    public float spawnSpeed = 3000;
+    public float spawnSpeed = 3;
 
     //vislualiser scale
-    public float scale = 10;
+    public float scale = 2;
 
     //list of game objects
     List<GameObject> elements = new List<GameObject>();
@@ -31,7 +31,7 @@ public class Cubes : MonoBehaviour
         Vector3 startPos = transform.position;
         startPos.z = 0;
 
-        Vector3 size = new Vector3(1, 1, 9);
+        Vector3 size = new Vector3(1, 1, 8);
 
         for (int n = 0; n < numRows; n++)
         {
