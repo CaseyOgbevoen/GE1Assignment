@@ -31,6 +31,7 @@ public class Cubes : MonoBehaviour
         Vector3 startPos = transform.position;
         startPos.z = 0;
 
+        //8 cubes in row - 8 frequency bands
         Vector3 size = new Vector3(1, 1, 8);
 
         for (int n = 0; n < numRows; n++)
@@ -59,16 +60,20 @@ public class Cubes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 1000; i++)
+        for( int j = 0; j < numRows; j++)
         {
-            Vector3 ls = elements[i].transform.localScale;
-            ls.y = Mathf.Lerp(ls.y, 1 + (AudioAnalyser.bands[i] * scale), Time.deltaTime * 10.0f);
-            elements[i].transform.localScale = ls;
+            for (int i = 0; i < 1000; i++)
+            {
+                Vector3 ls = elements[i].transform.localScale;
+                ls.y = Mathf.Lerp(ls.y, 1 + (AudioAnalyser.bands[i] * scale), Time.deltaTime * 10.0f);
+                elements[i].transform.localScale = ls;
 
-            //assign colour based on y value
-            elements[i].GetComponent<Renderer>().material.color = Color.HSVToRGB(ls.y / (float)AudioAnalyser.bands.Length, 1, 1);
+                //assign colour based on y value
+                elements[i].GetComponent<Renderer>().material.color = Color.HSVToRGB(ls.y / (float)AudioAnalyser.bands.Length, 1, 1);
 
+            }
         }
+        
     }
 
 }
