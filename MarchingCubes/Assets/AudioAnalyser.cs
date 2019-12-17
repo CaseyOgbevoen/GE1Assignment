@@ -9,10 +9,7 @@ public class AudioAnalyser : MonoBehaviour
     AudioSource a;
     public bool useMic = false;
     public AudioClip clip; 
-    //public AudioMixerGroup amgMic;
     public AudioMixerGroup amgMaster;
-
-    //public string selectedDevice;
 
     public int frameSize = 512;
     public static float[] bands;
@@ -27,9 +24,9 @@ public class AudioAnalyser : MonoBehaviour
         spectrum = new float[frameSize];
         bands = new float[(int)Mathf.Log(frameSize, 2)];
 
+        //play audio
         a.clip = clip;
         a.outputAudioMixerGroup = amgMaster;
-
         a.Play();
     }
 
