@@ -1,41 +1,73 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Audio;
 
 public class Cubes : MonoBehaviour
 {
-    public GameObject _sampleCubePrefab;
-    GameObject[] _sampleCube = new GameObject[512];
-    public float _maxScale;
+    //row counter
+    public int numRows = 1;
 
-    public int _band;
-    public float _startScale, _scaleMultiplier;
+    //spawn speed
+    public float spawnSpeed = 3000;
+
+    //vislualiser scale
+    public float scale = 10;
+
+    //list of game objects
+    List<GameObject> elements = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < 512; i++)
+        StartCoroutine(CreateVisualisers());
+        //CreateVisualisers();
+    }
+
+    //create vislualisers function
+    IEnumerator CreateVisualisers()
+    //void CreateVisualisers()
+    {
+        //set position
+        Vector3 startPos = transform.position;
+        startPos.z = 0;
+
+        Vector3 size = new Vector3(1, 1, 9);
+
+        for (int n = 0; n < numRows; n++)
         {
-            GameObject _instanceSampleCube = (GameObject)Instantiate(_sampleCubePrefab);
-            _instanceSampleCube.transform.position = this.transform.position;
-            _instanceSampleCube.transform.parent = this.transform;
-            _instanceSampleCube.name = "SampleCube" + i;
-            this.transform.eulerAngles = new Vector3(0, -0.703125f * i, 0);
-            _instanceSampleCube.transform.position = Vector3.forward * 100;
-            _sampleCube[i] = _instanceSampleCube;
+            for (int y = 0; y < size.y; y++)
+            {
+                for (int z = 0; z < size.z; z++)
+                {
+                    //spawn cube
+                    GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    cube.transform.position = new Vector3(startPos.z, y * size.y, z * size.z);
+
+                    //parent
+                    cube.transform.parent = this.transform;
+
+                    elements.Add(cube);
+
+                    startPos.z++;
+                }
+            }
+            yield return new WaitForSeconds(spawnSpeed);
+            numRows++;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 8; i++)
+        for (int i = 0; i < 1000; i++)
         {
-            if(_sampleCube != null)
-            {
-                _sampleCube[i].transform.localScale = new Vector3(transform.localScale.x, (AudioAnalyser2._freqBand[_band] * _scaleMultiplier) + _startScale, transform.localScale.z);
-            }
+            Vector3 ls = elements[i].transform.localScale;
+            ls.y = Mathf.Lerp(ls.y, 1 + (AudioAnalyser.bands[i] * scale), Time.deltaTime * 10.0f);
+            elements[i].transform.localScale = ls;
+
+            //assign colour based on y value
+            elements[i].GetComponent<Renderer>().material.color = Color.HSVToRGB(ls.y / (float)AudioAnalyser.bands.Length, 1, 1);
+
         }
     }
 
