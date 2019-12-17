@@ -9,6 +9,9 @@ public class Cubes : MonoBehaviour
     GameObject[] _sampleCube = new GameObject[512];
     public float _maxScale;
 
+    public int _band;
+    public float _startScale, _scaleMultiplier;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,11 +30,11 @@ public class Cubes : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < 512; i++)
+        for (int i = 0; i < 8; i++)
         {
             if(_sampleCube != null)
             {
-                _sampleCube[i].transform.localScale = new Vector3(10, (AudioAnalyser2._samples[i] * _maxScale) * 2, 10);
+                _sampleCube[i].transform.localScale = new Vector3(transform.localScale.x, (AudioAnalyser2._freqBand[_band] * _scaleMultiplier) + _startScale, transform.localScale.z);
             }
         }
     }
