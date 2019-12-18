@@ -21,7 +21,7 @@ public class Ring : MonoBehaviour
         float theta = (Mathf.PI * 2.0f) / (float)AudioAnalyser.frameSize;
         for (int i = 0; i < AudioAnalyser.frameSize; i++)
         {
-            Vector3 p = new Vector3(50 + (Mathf.Sin(theta * i) * radius), -50, -2 + (Mathf.Cos(theta * i) * radius));
+            Vector3 p = new Vector3(40 + (Mathf.Sin(theta * i) * radius), -45, -2 + (Mathf.Cos(theta * i) * radius));
             p = transform.TransformPoint(p);
             Quaternion q = Quaternion.AngleAxis(theta * i * Mathf.Rad2Deg, Vector3.up);
             q = transform.rotation * q;
