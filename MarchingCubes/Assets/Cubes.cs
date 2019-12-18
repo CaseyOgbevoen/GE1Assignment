@@ -11,10 +11,11 @@ public class Cubes : MonoBehaviour
     public float spawnSpeed = 3;
 
     //vislualiser scale
-    public float scale = 2;
+    public float scale = 5;
 
     //list of game objects
-    List<GameObject> elements = new List<GameObject>();
+    //List<GameObject> elements = new List<GameObject>();
+    public GameObject [] elements;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +48,8 @@ public class Cubes : MonoBehaviour
                     //parent
                     cube.transform.parent = this.transform;
 
-                    elements.Add(cube);
+                    //elements.Add(cube);
+                    elements[z] = cube;
 
                     startPos.z++;
                 }
