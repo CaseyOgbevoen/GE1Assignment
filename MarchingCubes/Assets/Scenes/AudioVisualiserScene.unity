@@ -303,7 +303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77f6f9c69de969a43b8dcde90d6feeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  frameSize: 512
 --- !u!82 &1258785614
 AudioSource:
   m_ObjectHideFlags: 0

@@ -47,7 +47,6 @@ public class Cubes : MonoBehaviour
                     //parent
                     cube.transform.parent = this.transform;
 
-                    //elements.Add(cube);
                     elements[z] = cube;
 
                     startPos.z++;

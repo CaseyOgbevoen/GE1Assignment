@@ -8,10 +8,16 @@ public class AudioAnalyser : MonoBehaviour
 {
     AudioSource audioSource; 
 
-    public int frameSize = 512;
     public static float[] samples = new float[512];
     public static float[] bands = new float[8];
 
+    // Start is called before the first frame update
+    void Start()
+    {
+            audioSource = GetComponent<AudioSource>();
+    }
+
+    //create frequency bands
     void GetFrequencyBands()
     {
         int count = 0;
@@ -36,12 +42,6 @@ public class AudioAnalyser : MonoBehaviour
             average /= count;
             bands[i] = average * 10;
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-            audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
