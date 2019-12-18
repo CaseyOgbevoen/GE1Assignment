@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class Ring : MonoBehaviour
 {
-    public float scale = 20;
+    public float scale = 50;
     public float radius = 10;
-
-    //speed
-    public float speed = 5f;
 
     List<GameObject> elements = new List<GameObject>();
 
@@ -24,11 +21,7 @@ public class Ring : MonoBehaviour
         float theta = (Mathf.PI * 2.0f) / (float)AudioAnalyser.frameSize;
         for (int i = 0; i < AudioAnalyser.frameSize; i++)
         {
-            Vector3 p = new Vector3(
-                Mathf.Sin(theta * i) * radius
-                , 0
-                , Mathf.Cos(theta * i) * radius
-                );
+            Vector3 p = new Vector3(50 + (Mathf.Sin(theta * i) * radius), -50, -2 + (Mathf.Cos(theta * i) * radius));
             p = transform.TransformPoint(p);
             Quaternion q = Quaternion.AngleAxis(theta * i * Mathf.Rad2Deg, Vector3.up);
             q = transform.rotation * q;
@@ -37,11 +30,7 @@ public class Ring : MonoBehaviour
             cube.transform.SetPositionAndRotation(p, q);
             cube.transform.parent = this.transform;
             
-            cube.GetComponent<Renderer>().material.color = Color.HSVToRGB(
-                i / (float)AudioAnalyser.frameSize
-                , 1
-                , 1
-                );
+            cube.GetComponent<Renderer>().material.color = Color.HSVToRGB(i / (float)AudioAnalyser.frameSize, 1, 1);
 
             elements.Add(cube);
         }
@@ -50,7 +39,7 @@ public class Ring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+        transform.Translate(Vector3.right * moveCamera.speed * Time.deltaTime);
 
         for (int i = 0; i < elements.Count; i++)
         {
