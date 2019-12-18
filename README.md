@@ -14,7 +14,7 @@ using a co-routine so that I could set the speed that they appeared.
 The camera moves forward at the same speed as the first visualiser, so that it seems to stay in the same place underneath
 the cube rows.
 
-I used the audio visualisation tutorials from class and from YouTube - (https://www.youtube.com/watch?v=5pmoP1ZOoNs&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo) - and tried to expand on them to make something new
+I used the audio visualisation tutorials from class and from YouTube - (https://www.youtube.com/watch?v=5pmoP1ZOoNs&list=PL3POsQzaCw53p2tA6AWf7_AWgplskR0Vo) - as a starting point, and tried to expand on them to make something new
 fun to look at.
 
 ## I'm Most Proud Of
