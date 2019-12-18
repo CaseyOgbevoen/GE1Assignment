@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Ring : MonoBehaviour
 {
-    public float scale = 25;
-    public float radius = 20;
+    public float scale = 25.0f;
+    public float radius = 20.0f;
 
     List<GameObject> elements = new List<GameObject>();
 
