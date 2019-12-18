@@ -6,8 +6,9 @@ using UnityEngine.Audio;
 [RequireComponent(typeof(AudioSource))]
 public class AudioAnalyser : MonoBehaviour
 {
-    AudioSource audioSource; 
+    AudioSource audioSource;
 
+    public static int frameSize = 512;
     public static float[] samples = new float[512];
     public static float[] bands = new float[8];
 
