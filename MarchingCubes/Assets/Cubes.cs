@@ -11,7 +11,7 @@ public class Cubes : MonoBehaviour
     public float spawnSpeed = 1.5f;
 
     //vislualiser scale
-    public float scale = 2f;
+    public float scale = 2.5f;
 
     //array of game objects
     public GameObject [] elements;
