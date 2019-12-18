@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numRows: 1
-  spawnSpeed: 3
-  scale: 3
+  spawnSpeed: 1.5
+  scale: 2
   elements:
   - {fileID: 0}
   - {fileID: 0}
@@ -253,8 +253,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 562612649}
   m_LocalRotation: {x: -0.006170542, y: 0.7070799, z: -0.006170542, w: 0.7070799}
-  m_LocalPosition: {x: -35, y: 10, z: 25}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: -50, y: 20, z: 25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c446238e8da094a42953cef585e6846c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
 --- !u!1 &1258785612
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,7 +6,7 @@ public class moveCamera : MonoBehaviour
 {
 
     //speed
-    public float speed = 1f;
+    public float speed = 5f;
 
     // Start is called before the first frame update
     void Start()

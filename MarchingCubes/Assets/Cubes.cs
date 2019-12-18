@@ -8,13 +8,12 @@ public class Cubes : MonoBehaviour
     public int numRows = 1;
 
     //spawn speed
-    public float spawnSpeed = 3;
+    public float spawnSpeed = 1.5f;
 
     //vislualiser scale
-    public float scale = 5;
+    public float scale = 2f;
 
-    //list of game objects
-    //List<GameObject> elements = new List<GameObject>();
+    //array of game objects
     public GameObject [] elements;
 
     // Start is called before the first frame update
@@ -66,8 +65,9 @@ public class Cubes : MonoBehaviour
         {
             for (int i = 0; i < 1000; i++)
             {
+                //transform cube in scene
                 Vector3 ls = elements[i].transform.localScale;
-                ls.y = Mathf.Lerp(ls.y, 1 + (AudioAnalyser.bands[i] * scale), Time.deltaTime * 10.0f);
+                ls.y = Mathf.Lerp(ls.y, 1 + (AudioAnalyser.bands[i] * scale), Time.deltaTime * 5.0f);
                 elements[i].transform.localScale = ls;
 
                 //assign colour based on y value
